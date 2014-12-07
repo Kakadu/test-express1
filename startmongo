@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -ex
+mongod --dbpath ./data --port 27017
+

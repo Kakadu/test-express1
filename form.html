@@ -61,11 +61,19 @@ $('.addform').submit(function (evt) {
 <form class="addform" action="/add/" method='POST' onsubmit="event.preventDefault(); return mysubmit();" >
   <div>
     <label for-name='MovieTitle'>Title</label>
-    <input type='text' name='MovieTitle' />
+    <input type='text' name='MovieTitle' value="111" />
   </div>
   <div>
     <label for-name='MovieCover'>Cover image</label>
-    <input type='text' name='MovieCover' />
+    <input type='text' name='MovieCover' value="coverurl"/>
+  </div>
+  <div>
+    <label for-name='MagnetLink'>Magnet link</label>
+    <input type='text' name='MagnetLink' value="llll"/>
+  </div>
+  <div>
+    <label for-name='Genre'>Genre</label>
+    <input type='text' name='Genre' value="genre" />
   </div>
 
   <br>

@@ -1,1 +1,79 @@
-<h1>111</h1>
+<head>
+
+<link rel="stylesheet" type="text/css" href="main.css"/>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+function getParameters(form) {
+  var parameters = "";
+  var y=form.elements.length;
+  for (var x=0; x<y; x++) {
+    var field = form.elements[x];
+    if (field.name && field.type !== "submit") {
+      if (x != 0) {
+        parameters += "&";
+      }
+      parameters += encodeURIComponent(field.name) + "="
+                 +  (field.type == "radio" || field.type == "checkbox" ? (field.checked == "checked") : encodeURIComponent(field.value));
+    }
+  }
+  return parameters;
+}
+
+function mysubmit(form) {
+  if (form === undefined)
+    form = $(".addform")[0];
+
+  var params = getParameters($(".addform")[0]);
+  console.log("params = " + params);
+  console.log("action = " + form.action);
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', form.action, true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.onload = function(oEvent) {
+    if (xhr.status == 200) {
+      console.log("200");
+    } else {
+      console.log("Error " + xhr.status + " occurred .");
+    }
+  };
+  xhr.send(params);
+
+
+  return false; // to prevent form sending
+}
+
+$('.addform').submit(function (evt) {
+    evt.preventDefault();
+    //window.history.back();
+});
+
+
+</script>
+</head>
+
+<body>
+
+<div>
+<form class="addform" action="/add/" method='POST' onsubmit="event.preventDefault(); return mysubmit();" >
+  <div>
+    <label for-name='MovieTitle'>Title</label>
+    <input type='text' name='MovieTitle' />
+  </div>
+  <div>
+    <label for-name='MovieCover'>Cover image</label>
+    <input type='text' name='MovieCover' />
+  </div>
+
+  <br>
+  <div class='button'>
+    <button >Add</button>
+    <!-- onclick="mysubmit(this.form); return false;" -->
+  </div>
+</form>
+
+</div>
+</body>
